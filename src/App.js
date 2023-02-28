@@ -9,12 +9,20 @@ const App = () => {
     setProductList((prevProductList) => {
       return [...prevProductList, { product: product, id: Math.random().toString() }];
     });
-  }
+  };
+
+  const removeProductHandler = (id) => {
+    const newList = productList.filter((product) => product.id !== id)
+    setProductList(newList);
+  };
 
   return (
     <div>
       <AddProduct onAddProduct={addProductHandler}/>
-      <ProductList product={productList} />
+      <ProductList 
+        product={productList} 
+        onRemove={removeProductHandler}
+      />
     </div>
   );
 };

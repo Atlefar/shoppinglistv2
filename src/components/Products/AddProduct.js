@@ -26,7 +26,7 @@ const AddProduct = (props) => {
             <label htmlFor='productname'>Produkt</label>
             <input 
             id='productname' 
-            type="text" 
+            type="text"
             onChange={productChangeHandler}
             value={enteredProduct}
             />
