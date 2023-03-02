@@ -1,26 +1,29 @@
+import { useState } from 'react';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import classes from './ProductList.module.css';
 
 const ProductList = (props) => {
-  const checkProductHandler = (event) => {
-    if (event.target.style.textDecoration) {
-      event.target.style.removeProperty('text-decoration');
-    } else {
-      event.target.style.setProperty('text-decoration', 'line-through');
-    }
+  const [line, setLine] = useState(false);
+
+  const lineThroughText = () => {
+    setLine(!line);
   };
-  
+
     return (
       <Card className={classes.product}> 
         <ul>
-            {props.product.map((product) => (
-                <li key={product.id} 
-                >
-                  <span onClick={checkProductHandler}>{product.product}</span>
-                  <Button onClick={() => props.onRemove(product.id)}>Slett</Button>
-                </li>
-                ))}
+          {props.product.map((product) => (
+              <li key={product.id}>
+                <span 
+                  className={line ? classes.checked : null} 
+                  onClick={lineThroughText}
+                  >
+                  {product.product}
+                </span>
+                <Button onClick={() => props.onRemove(product.id)}>Slett</Button>
+              </li>
+              ))}
         </ul>
       </Card>
     );
